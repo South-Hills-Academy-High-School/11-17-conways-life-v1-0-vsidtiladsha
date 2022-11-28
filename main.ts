@@ -46,6 +46,18 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 function copyBottom () {
     return grid[11]
 }
+function countneighborswrapright (currentRow: number, currentCol: number) {
+    neighborCount = 0
+    neighborCount += copyRight(currentRow - 1)
+    neighborCount += grid[currentRow - 1][currentCol - 0]
+    neighborCount += grid[currentRow - 1][currentCol - 1]
+    neighborCount += grid[currentRow - 0][currentCol - 1]
+    neighborCount += grid[currentRow + 1][currentCol - 1]
+    neighborCount += grid[currentRow + 1][currentCol + 0]
+    neighborCount += copyRight(currentRow + 1)
+    neighborCount += copyRight(currentRow + 0)
+    return neighborCount
+}
 function copyRight (whichRow: number) {
     return grid[whichRow][15]
 }
@@ -161,9 +173,9 @@ function countNeighbors (currentRow: number, currentCol: number) {
     } else if (currentRow == 11) {
         return countNeighborsWrapBottom(currentRow, currentCol)
     } else if (currentCol == 0) {
-        return 0
+        return countneighborswrapleft(currentRow, currentCol)
     } else if (currentCol == 15) {
-        return 0
+        return countneighborswrapright(currentRow, currentCol)
     } else {
         neighborCount += grid[currentRow - 1][currentCol - 1]
         neighborCount += grid[currentRow - 1][currentCol - 0]
@@ -210,9 +222,6 @@ function copyLeft (whichRow: number) {
 function autoon () {
     textSprite = 0
 }
-function vountneighborswrapright (currentRow: number, currentCol: number) {
-	
-}
 function countNeighborsWrapBottom (currentRow: number, currentCol: number) {
     neighborCount = 0
     if (currentCol == 0) {
@@ -232,7 +241,16 @@ function countNeighborsWrapBottom (currentRow: number, currentCol: number) {
     return neighborCount
 }
 function countneighborswrapleft (currentRow: number, currentCol: number) {
-	
+    neighborCount = 0
+    neighborCount += copyRight(currentRow - 1)
+    neighborCount += grid[currentRow - 1][currentCol + 0]
+    neighborCount += grid[currentRow - 1][currentCol + 1]
+    neighborCount += grid[currentRow - 0][currentCol + 1]
+    neighborCount += grid[currentRow + 1][currentCol + 1]
+    neighborCount += grid[currentRow + 1][currentCol + 0]
+    neighborCount += copyRight(currentRow + 1)
+    neighborCount += copyRight(currentRow + 0)
+    return neighborCount
 }
 function copyTop () {
     return grid[0]
